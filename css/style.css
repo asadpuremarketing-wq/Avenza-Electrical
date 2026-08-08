@@ -659,31 +659,6 @@ button{font-family:var(--ff);cursor:pointer;}
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
 .fade-in.visible{opacity:1;transform:translateY(0);}
 
-/* ---- Sticky mobile call bar ---- */
-.mobile-call-bar{display:none;}
-@media(max-width:768px){
-  .mobile-call-bar{
-    display:flex;position:fixed;bottom:0;left:0;right:0;z-index:1300;
-    background:rgba(15,16,19,0.96);backdrop-filter:blur(10px);
-    border-top:1px solid var(--border);
-    padding:10px 14px calc(10px + env(safe-area-inset-bottom));
-    gap:10px;
-  }
-  .mobile-call-bar a{
-    flex:1;display:flex;align-items:center;justify-content:center;gap:8px;
-    padding:13px 10px;border-radius:8px;font-size:14px;font-weight:600;
-  }
-  .mobile-call-bar .bar-call{
-    background:linear-gradient(135deg,var(--gold-light),var(--gold-dark));color:#141414;
-  }
-  .mobile-call-bar .bar-quote{
-    border:1px solid rgba(255,255,255,0.2);color:var(--silver-bright);
-  }
-  .mobile-call-bar svg{width:16px;height:16px;flex-shrink:0;}
-  /* keep page content clear of the fixed bar */
-  body{padding-bottom:68px;}
-}
-
 /* ==========================================================
    Mobile Optimization
    ========================================================== */
