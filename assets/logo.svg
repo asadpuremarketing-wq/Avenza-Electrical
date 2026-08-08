@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1245 1245" fill="none">
+  <defs>
+    <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8e8e8"/>
+      <stop offset="35%" stop-color="#9a9a9a"/>
+      <stop offset="55%" stop-color="#f5f5f5"/>
+      <stop offset="75%" stop-color="#8a8a8a"/>
+      <stop offset="100%" stop-color="#d8d8d8"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0a94a"/>
+      <stop offset="100%" stop-color="#b8802e"/>
+    </linearGradient>
+  </defs>
+  <path d="M627 265 L697 425 L655 425 L627 355 L423 787 L328 787 Z" fill="url(#silverGrad)"/>
+  <path d="M818 265 L935 787 L508 787 L558 693 L790 693 L695 425 Z" fill="#3d4c58"/>
+  <path d="M818 480 L905 693 L748 693 L705 590 Z" fill="url(#goldGrad)"/>
+  <text x="622" y="920" font-family="Arial, Helvetica, sans-serif" font-size="92" letter-spacing="14" fill="#f2f2f2" text-anchor="middle" font-weight="500">AVENZA ELECTRICAL</text>
+</svg>
