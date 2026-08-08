@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://avenza-electrical.vercel.app/sitemap.xml
+Sitemap: https://avenzaelectrical.ca/sitemap.xml
