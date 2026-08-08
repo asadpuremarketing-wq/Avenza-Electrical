@@ -154,7 +154,30 @@ document.addEventListener('DOMContentLoaded', () => {
     update();
   }
 
-  /* Lead form handling (all forms share class .lead-form-el) */
+  /* Lead form handling (all forms share class .lead-form-el)
+     Submits to /api/send-lead (a Vercel serverless function) which emails
+     the business and, if the visitor gave an email, sends them a branded
+     confirmation too — both via the business's own Gmail account.
+     If that request fails (e.g. running the site locally before deploying,
+     or the API briefly down), it falls back to a mailto: draft so the form
+     never dead-ends. */
+  const LEAD_EMAIL = 'Avenzaelectrical@gmail.com';
+
+  function mailtoFallback(form, data) {
+    const subject = `New Quote Request from ${data.name}`;
+    const bodyLines = [
+      `Name: ${data.name}`,
+      `Phone: ${data.phone}`,
+      `Email: ${data.email || '(not provided)'}`,
+      `Service Needed: ${data.service || '(not specified)'}`,
+      '',
+      'Message:',
+      data.message || '(none)'
+    ];
+    const mailtoLink = `mailto:${LEAD_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    window.location.href = mailtoLink;
+  }
+
   document.querySelectorAll('.lead-form-el').forEach(form => {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -173,13 +196,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!valid) return;
 
+      const data = Object.fromEntries(new FormData(form));
       const wrap = form.closest('.lead-form');
       const successEl = wrap ? wrap.querySelector('.form-success') : null;
-      form.style.display = 'none';
-      if (successEl) successEl.style.display = 'block';
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
 
-      // In production, send form data to backend / email service here.
-      console.log('Lead captured:', Object.fromEntries(new FormData(form)));
+      fetch('/api/send-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+        .then(r => { if (!r.ok) throw new Error('Request failed'); })
+        .then(() => {
+          form.style.display = 'none';
+          if (successEl) successEl.style.display = 'block';
+        })
+        .catch(() => {
+          form.style.display = 'none';
+          if (successEl) successEl.style.display = 'block';
+          mailtoFallback(form, data);
+        });
     });
   });
 

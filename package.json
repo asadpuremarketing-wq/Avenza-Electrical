@@ -1,0 +1,9 @@
+{
+  "name": "avenza-electrical",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Avenza Electrical website with Netlify Function for lead-form email notifications.",
+  "dependencies": {
+    "nodemailer": "^6.9.14"
+  }
+}
